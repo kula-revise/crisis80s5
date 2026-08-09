@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Putting It Together | The Crisis of Apartheid in the 1980s | Kula Revise</title>
+<title>Build the Skeleton | The Crisis of Apartheid in the 1980s | Kula Revise</title>
 <style>
   /* ============================================================
      KULA SOURCE ENGINE v3: TOKEN CONTRACT
@@ -173,7 +173,7 @@
   --cut:   #DFDDD4;   /* insets, sources, carousels */
   --ink:   #211F26;
   --clay:  #5E5A66;   /* stage tags, quiet labels */
-  --fade:  #7C7885;
+  --fade:  #625E6D;
   /* aubergine for structure, viridian for anything the learner earned */
   --a1: #5B3A6E;  --a1-rgb: 91,58,110;
   --a2: #2C6B57;  --a2-rgb: 44,107,87;
@@ -375,7 +375,10 @@ h1, h2, h3 {
    The same thirteen, and nothing else. engine/tokens.css re-points every
    derived token, so the old state-colour patch block is not carried here.
    --fade is chosen to measure above 7 to 1 against --paper, because it is what
-   --muted inherits and --muted is every expander body. Measured at 7.3.
+   --muted inherits and --muted is every expander body. Measured against --cut,
+   which is the ground it sits on inside an expander, not against --paper. That
+   distinction was found on the TRC build and swept back here: the earlier
+   figures were taken against --paper and both modes failed on --cut.
 
    The three built skins each carry a legacy state-colour patch block naming
    body.alt .option.correct, .explanation, the chips and every button. Checked
@@ -389,7 +392,7 @@ body.alt {
   --cut:   #29272F;
   --ink:   #EAE7EE;
   --clay:  #A49EAE;
-  --fade:  #B0AABA;
+  --fade:  #B8B2C2;
   --a1: #B08BC7;  --a1-rgb: 176,139,199;
   --a2: #6BBD9C;  --a2-rgb: 107,189,156;
 }
@@ -631,6 +634,32 @@ body { padding-bottom: 4.5rem !important; }
   .srcpeek .peek-body { padding: 0 0.85rem 0.85rem; font-size: 0.94rem; line-height: 1.62; border-top: 1px solid var(--rule); margin: 0 0.85rem; padding-left: 0; padding-right: 0; }
   .srcpeek .peek-body p { margin: 0.7rem 0 0; }
 
+  /* v2.1 multi-source reopen. Tabs plus a swipeable track, so every source in
+     the file is reachable from any question. Absent on a single-source lesson,
+     which renders exactly as it did before. */
+  .srcpeek.multi .peek-body { padding-bottom: 0.5rem; }
+  .peek-tabs { display: flex; gap: 0.4rem; overflow-x: auto; padding: 0.7rem 0 0.6rem;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .peek-tabs::-webkit-scrollbar { display: none; }
+  .peek-tab { flex: 0 0 auto; min-height: 40px; padding: 0.45rem 0.85rem;
+    font-family: var(--sans); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; cursor: pointer;
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--rule); border-radius: 0; }
+  .peek-tab.on { background: var(--a1); color: var(--on-a1); border-color: var(--a1); }
+  .peek-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 0; }
+  .peek-track::-webkit-scrollbar { display: none; }
+  .peek-slide { flex: 0 0 100%; scroll-snap-align: start; padding-right: 0.1rem; }
+  .peek-slide .peek-attr { font-family: var(--sans); font-size: 0.66rem; font-weight: 700;
+    line-height: 1.45; color: var(--muted); padding-bottom: 0.5rem; margin-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule); }
+  .peek-slide p { margin: 0.7rem 0 0; }
+  .srcpeek.multi::after { content: "Swipe, or tap a source above."; display: block;
+    font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted);
+    padding: 0.55rem 0 0.2rem; }
+  .srcpeek.multi:not([open])::after { display: none; }
+
   .marks { font-family: var(--mono, var(--sans)); font-size: 0.68rem; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--a1); font-weight: 700; margin-left: 0.7rem; }
   .q-meta { margin-bottom: 0.9rem; }
@@ -717,7 +746,7 @@ body { padding-bottom: 4.5rem !important; }
 (function(){
 const COVER = {
   "eyebrow": "Kula Revise &middot; Grade 12 History &middot; The 1980s",
-  "title": "Putting It Together",
+  "title": "Build the Skeleton",
   "lines": [
     "Two documents. One from Washington, one from a South African courtroom.",
     "Neither was written for you, and neither was written for the public.",
@@ -733,7 +762,7 @@ const RESULTS = {
   "title": "Where you stand",
   "done": {
     "label": "Unit complete",
-    "title": "Putting It Together",
+    "title": "Build the Skeleton",
     "text": "Tap Done, then sit What Stuck and compare it with the score you wrote down at the start."
   },
   "footer": "Next: What Stuck, the same eighteen facts asked from the other direction.",
@@ -818,7 +847,7 @@ const FLOW = [
       "The right to hold a public meeting without official permission"
     ],
     "correct": 0,
-    "explanation": "Franchise is the right to vote. Two marks means the whole idea, so you name who votes and what they are voting for. Option {opt1} is close and it is a different right, because standing as a candidate is not the same as choosing one. That distinction matters here, since the 1983 reform handed one group a vote and left another with nothing."
+    "explanation": "Franchise is the right to vote. Two marks means the whole idea, so you name who votes and what they are voting for. Option {opt1} is close and it is a different right, because standing as a candidate is not the same as choosing one."
   },
   {
     "type": "question",
@@ -900,7 +929,7 @@ const FLOW = [
       "To remove a councillor who refused to collect township rents"
     ],
     "correct": 0,
-    "explanation": "The regulation is quoted in the source and it is about gatherings. Two marks, so name the power and its reach: one meeting, or a whole class of meetings at once. Option {opt1} is a real power of the period, because detention sat under the security laws rather than under these regulations. You would be citing the wrong document."
+    "explanation": "The regulation is quoted in the source and it is about gatherings. Two marks, so name the power and its reach: one meeting, or a whole class of meetings at once. Option {opt1} is a real power of the period, because detention sat under the security laws rather than under these regulations. That answer points you at the wrong document."
   },
   {
     "type": "question",
@@ -1206,24 +1235,78 @@ function renderStat(item){
 
 // Reopen strip: shown on a question that follows a source, so the learner
 // never has to tap Back to reread the extract.
+//
+// v2.1. Was: the strip offered LAST_SOURCE only. That is correct for a lesson
+// built on one source and wrong for a capstone, where the paragraph question
+// asks for all of them and a learner on the closing screens could reach only
+// the most recent. Now every source seen so far in the file is reachable: a row
+// of tabs, and a swipeable track underneath. One source renders exactly as
+// before, so nothing in the existing corpus changes.
 function sourcePeek(item){
   if(item.noSource) return "";
-  const s = item.sourceRef || LAST_SOURCE;
-  if(!s || !s.body) return "";
-  return `<details class="srcpeek"><summary>
+  if(item.sourceRef && item.sourceRef.body){
+    return peekShell([item.sourceRef]);
+  }
+  const seen = SOURCES_SEEN.filter(s => s && s.body);
+  if(!seen.length) return "";
+  return peekShell(seen);
+}
+
+function peekShell(list){
+  const many = list.length > 1;
+  const cue = many
+    ? `Tap to read the ${list.length} sources again`
+    : `Tap to read ${esc(list[0].label)} again`;
+  const who = many
+    ? list.map(s=>esc(s.label)).join(" &middot; ")
+    : esc(stripTags(list[0].attr)).slice(0,90);
+  const tabs = many
+    ? `<div class="peek-tabs" role="tablist">${list.map((s,i)=>
+        `<button class="peek-tab${i===list.length-1?" on":""}" data-peek="${i}" role="tab">${esc(s.label)}</button>`).join("")}</div>`
+    : "";
+  const track = `<div class="peek-track" data-peek-track>${list.map(s=>
+      `<div class="peek-slide"><div class="peek-attr">${s.attr}</div>${s.body}</div>`).join("")}</div>`;
+  return `<details class="srcpeek${many?" multi":""}"><summary>
       <svg class="chev" width="11" height="13" viewBox="0 0 11 13" fill="none" aria-hidden="true"><path d="M2 1.5 L8.5 6.5 L2 11.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span class="peek-cue">Tap to read ${esc(s.label)} again<span class="peek-who">${esc(stripTags(s.attr)).slice(0,90)}</span></span>
-    </summary><div class="peek-body">${s.body}</div></details>`;
+      <span class="peek-cue">${cue}<span class="peek-who">${who}</span></span>
+    </summary><div class="peek-body">${tabs}${track}</div></details>`;
+}
+
+// Tabs scroll the track; swiping the track updates the tabs. Both work alone,
+// so a learner who never notices the tabs can still swipe, and the other way round.
+function bindPeek(){
+  stage.querySelectorAll(".srcpeek.multi").forEach(d=>{
+    const track = d.querySelector("[data-peek-track]");
+    const tabs  = Array.from(d.querySelectorAll(".peek-tab"));
+    if(!track || !tabs.length) return;
+    const go = i => track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+    tabs.forEach(t => t.addEventListener("click", () => go(parseInt(t.dataset.peek,10))));
+    let tick = null;
+    track.addEventListener("scroll", () => {
+      clearTimeout(tick);
+      tick = setTimeout(() => {
+        const i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+        tabs.forEach((t,n) => t.classList.toggle("on", n === i));
+      }, 60);
+    });
+    // open on the source the learner saw last, which is the one they were reading
+    d.addEventListener("toggle", () => {
+      if(d.open) requestAnimationFrame(() => { track.scrollLeft = (tabs.length-1) * track.clientWidth; });
+    });
+  });
 }
 function stripTags(h){ return String(h||"").replace(/<[^>]+>/g,""); }
 
 // ============ SOURCE ============
-// The most recent source rendered, so any later question can reopen it in place.
+// Every source rendered so far, in order, so any later question can reopen all
+// of them. LAST_SOURCE is kept as the final entry for anything still reading it.
+let SOURCES_SEEN = [];
 let LAST_SOURCE = null;
 
 function renderSource(item){
   const s=item.source;
   LAST_SOURCE = { label: item.sourceLabel || item.tag || "the source", attr: s.attr, body: s.body };
+  if(!SOURCES_SEEN.some(x => x.label === LAST_SOURCE.label)) SOURCES_SEEN.push(LAST_SOURCE);
   stage.innerHTML = `
     <div class="card">
       ${item.tag?`<div class="stage-tag">${esc(item.tag)}</div>`:""}
@@ -1457,6 +1540,7 @@ function syncNavCarousel(){
 }
 
 function bindToggles(){
+  bindPeek();
   stage.querySelectorAll("[data-toggle]").forEach(b=>b.addEventListener("click",()=>{
     b.nextElementSibling.classList.toggle("open");
   }));
