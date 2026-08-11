@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build the Skeleton | The Crisis of Apartheid in the 1980s | Kula Revise</title>
+<title>Putting It Together | The Crisis of Apartheid in the 1980s | Kula Revise</title>
 <style>
   /* ============================================================
      KULA SOURCE ENGINE v3: TOKEN CONTRACT
@@ -32,8 +32,8 @@
     --a1: #B4622D;   --a1-rgb: 180,98,45;
     --a2: #1F6B58;   --a2-rgb: 31,107,88;
     --serif: Georgia, 'Times New Roman', serif;
-    --sans:  system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --mono:  var(--sans);
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
 
     /* ---- DERIVED TOKENS. A skin should not need to touch these. ----
        They exist because the engine used to hardcode fourteen literal
@@ -66,12 +66,12 @@
   }
 
   /* ---- DARK MODE TOKEN RE-POINT ---------------------------------------
-     The skin supplies body.alt values for the thirteen identity variables.
+     The skin supplies body.dark values for the thirteen identity variables.
      Everything derived re-points here, once, for every unit. This is the
      engine-level fix for the three defects logged in MOBILE_FIXES_HANDOVER:
      a skin no longer needs the patch block at all.
      ------------------------------------------------------------------- */
-  body.alt {
+  body.dark {
     --muted:      var(--fade);
     --hair:       rgba(255,255,255,0.14);
     --hair-strong:rgba(255,255,255,0.26);
@@ -89,11 +89,9 @@
     --inset:  rgba(255,255,255,0.05);
   }
   /* Key term chips keep a visible edge once the ground inverts. */
-  body.alt .kt-term { border-color: var(--hair-strong); }
-  body.alt .kt-term summary { color: var(--ink); }
-  body.alt .kt-label { border-top-color: var(--hair-strong); }
-  /* v2 dimmed the options a learner did not pick; at 0.45 they vanish on a dark ground. */
-  body.alt .option.dimmed, body.alt .option-btn.dimmed { opacity: 0.72; }
+  body.dark .kt-term { border-color: var(--hair-strong); }
+  body.dark .kt-term summary { color: var(--ink); }
+  body.dark .kt-label { border-top-color: var(--hair-strong); }
 
   /* ---- MODE TOGGLE. Fixed bottom right, 44px minimum tap target. ---- */
   .mode-toggle {
@@ -177,9 +175,14 @@
   /* aubergine for structure, viridian for anything the learner earned */
   --a1: #5B3A6E;  --a1-rgb: 91,58,110;
   --a2: #2C6B57;  --a2-rgb: 44,107,87;
-  --serif: 'Source Serif 4', 'Charter', Georgia, serif;
-  --sans:  'IBM Plex Sans', 'Inter', system-ui, -apple-system, Arial, sans-serif;
-  --mono:  var(--sans);
+  /* The two hover steps are derived, not identity. Left in the engine
+     block they kept the engine's own accent and stopped tracking this
+     skin the moment it set its own. */
+  --ink-deep: #17161B;
+  --a2-deep:  #1F4D3F;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
 }
 
 /* 1. Ground: plan paper. Linear like the rest of the family, but crossed,
@@ -381,12 +384,12 @@ h1, h2, h3 {
    figures were taken against --paper and both modes failed on --cut.
 
    The three built skins each carry a legacy state-colour patch block naming
-   body.alt .option.correct, .explanation, the chips and every button. Checked
+   body.dark .option.correct, .explanation, the chips and every button. Checked
    against a shipped Angola file: it carries BOTH that patch block AND the
    engine's DARK MODE TOKEN RE-POINT, and the engine CSS reads --ok-bg, --no-bg,
    --chip-a-bg, --hair and --on-a2 rather than literals. So the patch block is
    redundant in those units and is correctly absent here. */
-body.alt {
+body.dark {
   --sand:  #17161B;
   --paper: #201E26;
   --cut:   #29272F;
@@ -395,15 +398,18 @@ body.alt {
   --fade:  #B8B2C2;
   --a1: #B08BC7;  --a1-rgb: 176,139,199;
   --a2: #6BBD9C;  --a2-rgb: 107,189,156;
+  /* On a dark ground a hover step goes lighter, not deeper. */
+  --ink-deep: #FFFFFF;
+  --a2-deep:  #8FD3B5;
 }
-body.alt {
+body.dark {
   background-image:
     repeating-linear-gradient(90deg, transparent 0 34px, rgba(234,231,238,0.038) 34px 35px),
     repeating-linear-gradient(0deg,  transparent 0 34px, rgba(234,231,238,0.038) 34px 35px) !important;
 }
-body.alt .card, body.alt .source, body.alt .stat-wrap,
-body.alt .carousel, body.alt .kt { border-color: rgba(176,139,199,0.30) !important; }
-body.alt .card, body.alt .stat-wrap, body.alt .carousel {
+body.dark .card, body.dark .source, body.dark .stat-wrap,
+body.dark .carousel, body.dark .kt { border-color: rgba(176,139,199,0.30) !important; }
+body.dark .card, body.dark .stat-wrap, body.dark .carousel {
   background-color: var(--paper) !important;
   background-image:
     linear-gradient(90deg,
@@ -413,14 +419,14 @@ body.alt .card, body.alt .stat-wrap, body.alt .carousel {
   background-size: 100% 3px !important;
   background-position: 0 0 !important;
 }
-body.alt .source {
+body.dark .source {
   box-shadow: inset 0 0 0 1px var(--cut), inset 0 0 0 2px rgba(176,139,199,0.34) !important;
 }
-body.alt .source-attr { border-bottom-color: rgba(176,139,199,0.36); }
-body.alt .stage-tag, body.alt .kt-label,
-body.alt .expl-label, body.alt .pop-label { color: #17161B !important; }
-body.alt .btn-begin { color: #17161B !important; }
-body.alt .btn-begin:hover { background: #C6A6D9 !important; border-color: #C6A6D9 !important; }
+body.dark .source-attr { border-bottom-color: rgba(176,139,199,0.36); }
+body.dark .stage-tag, body.dark .kt-label,
+body.dark .expl-label, body.dark .pop-label { color: #17161B !important; }
+body.dark .btn-begin { color: #17161B !important; }
+body.dark .btn-begin:hover { background: #C6A6D9 !important; border-color: #C6A6D9 !important; }
 /* ---- The two engine rules the token re-point cannot rescue ----------------
    Correction to the note above. engine/tokens.css re-points every DERIVED token,
    so the legacy state-colour patch block is redundant for options, chips and
@@ -430,17 +436,17 @@ body.alt .btn-begin:hover { background: #C6A6D9 !important; border-color: #C6A6D
    stay correct, because they sit on --paper and the relationship holds either
    way round. .btn-begin is already overridden above. That leaves two, and both
    invert into a light slab on a dark page. Angola patches the same two. */
-body.alt .primary-btn {
+body.dark .primary-btn {
   background: var(--cut) !important;
   color: var(--ink) !important;
   border: 1px solid rgba(176,139,199,0.38) !important;
 }
-body.alt .primary-btn:hover { background: #2C2934 !important; }
-body.alt .primary-btn .btn-title { color: var(--ink) !important; }
-body.alt .primary-btn .btn-sub   { color: var(--fade) !important; }
-body.alt .primary-btn .btn-num,
-body.alt .primary-btn .btn-arrow { color: var(--a1) !important; }
-body.alt .chip-apply {
+body.dark .primary-btn:hover { background: #2C2934 !important; }
+body.dark .primary-btn .btn-title { color: var(--ink) !important; }
+body.dark .primary-btn .btn-sub   { color: var(--fade) !important; }
+body.dark .primary-btn .btn-num,
+body.dark .primary-btn .btn-arrow { color: var(--a1) !important; }
+body.dark .chip-apply {
   background: rgba(234,231,238,0.16) !important;
   color: var(--ink) !important;
 }
@@ -448,14 +454,14 @@ body.alt .chip-apply {
 /* Light serif at 0.95rem thins out on a dark ground. The explanation block is
    the longest reading on any screen, so it gets the full --ink value and a
    touch more size and leading rather than inheriting a muted tone. */
-body.alt .expl-text, body.alt .disc-body { color: var(--ink) !important; }
-body.alt .expl-text { font-size: 1rem !important; line-height: 1.75 !important; }
+body.dark .expl-text, body.dark .disc-body { color: var(--ink) !important; }
+body.dark .expl-text { font-size: 1rem !important; line-height: 1.75 !important; }
 
-body.alt .figure img {
+body.dark .figure img {
   border-color: rgba(176,139,199,0.4) !important;
   filter: brightness(0.9) contrast(1.02);
 }
-body.alt .figure svg { border-color: rgba(176,139,199,0.4) !important; }
+body.dark .figure svg { border-color: rgba(176,139,199,0.4) !important; }
 
 /* The toggle is fixed bottom right and lands on Continue on a short viewport.
    Kept above the 44px tap minimum at 360px, which is where this last failed. */
@@ -517,7 +523,10 @@ body { padding-bottom: 4.5rem !important; }
   .cover-time { font-family: var(--sans); font-size: 0.8rem; color: var(--fade); margin-top: 1.4rem; letter-spacing: 0.02em; }
   .btn-begin { font-family: var(--sans); display: inline-flex; align-items: center; gap: 0.8rem; padding: 1.05rem 2.2rem; background: var(--ink); color: var(--on-ink); border: none; cursor: pointer; font-size: 1.12rem; font-weight: 700; }
   .btn-begin:hover { background: var(--ink-deep); }
-  .btn-begin .sa { color: var(--a1); font-size: 1.3rem; }
+  /* The arrow takes the button's own text colour. Painted --a1 it disappeared
+     on any skin that also makes the button --a1: that was dark mode on one
+     unit and light mode on another, from the same single cause. */
+  .btn-begin .sa { color: currentColor; font-size: 1.3rem; }
   .skip-link { display: block; margin: 1.6rem auto 0; background: transparent; border: none; color: var(--fade); font-family: var(--sans); font-size: 0.84rem; cursor: pointer; text-decoration: underline; }
 
   /* Story hook */
@@ -605,8 +614,10 @@ body { padding-bottom: 4.5rem !important; }
   .option.selected { background: var(--cut); border-color: var(--a1); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option.correct { background: var(--ok-bg); border-color: var(--a2); border-width: 2px; padding: 0.94rem 0.99rem; }
   .option.wrong { background: var(--no-bg); border-color: var(--clay); border-width: 2px; padding: 0.94rem 0.99rem; }
-  .option.dimmed { opacity: 0.46; }
-  body.alt .option.dimmed { opacity: 0.72; }
+  /* The dimmed state fell below readable contrast at 360px. One rule per mode,
+     and nothing later in the file competes with it. */
+  .option.dimmed, .option-btn.dimmed { opacity: 0.82; }
+  body.dark .option.dimmed, body.dark .option-btn.dimmed { opacity: 0.86; }
   .opt-letter { font-family: var(--serif); font-weight: 800; color: var(--a1); min-width: 1.1rem; }
   .opt-text { flex: 1; }
   .opt-mark { font-weight: 700; font-size: 1.1rem; }
@@ -680,19 +691,8 @@ body { padding-bottom: 4.5rem !important; }
   .sort-place { font-family: var(--sans); flex: 1; font-size: 0.78rem; font-weight: 700; padding: 0.4rem; background: var(--paper); border: 1px solid var(--hair-strong); cursor: pointer; color: var(--ink); }
 
   /* Running summary */
-  .runsum { background: rgba(var(--a2-rgb),0.08); border: 1px solid rgba(var(--a2-rgb),0.28); border-left: 5px solid var(--a2); padding: 1.3rem 1.4rem; }
-  .runsum-label { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.9rem; }
-  .runsum ol { margin: 0; padding-left: 1.3rem; }
-  .runsum li { font-size: 1.02rem; line-height: 1.66; margin-bottom: 0.7rem; color: var(--ink); }
-  .runsum li:last-child { margin-bottom: 0; }
-  .runsum li.fresh { font-weight: 700; color: var(--a2); }
 
   /* Popup */
-  .pop-back { position: fixed; inset: 0; background: var(--scrim); display: flex; align-items: center; justify-content: center; padding: 1.5rem; z-index: 50; }
-  .pop { background: var(--paper); border-top: 5px solid var(--a2); padding: 1.6rem 1.5rem; max-width: 30rem; width: 100%; box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-  .pop-label { font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--a2); font-weight: 700; margin-bottom: 0.8rem; }
-  .pop-text { font-size: 1.1rem; line-height: 1.6; font-weight: 600; color: var(--ink); margin-bottom: 1.3rem; }
-  .pop-btn { font-family: var(--sans); width: 100%; padding: 0.9rem; background: var(--a2); border: none; color: var(--on-a2); font-size: 0.98rem; font-weight: 700; cursor: pointer; }
 
   /* Nav */
   .nav { display: flex; justify-content: space-between; gap: 0.8rem; margin-top: 1rem; }
@@ -740,13 +740,31 @@ body { padding-bottom: 4.5rem !important; }
 </div>
 
 <script>
+/* ---- LMS EMBED EVENTS ----------------------------------------------------
+   Two moments, deliberately separate. Reaching the closing screen marks the
+   activity done for progress tracking. Choosing to leave it advances. Firing
+   advance on arrival would pull the learner off their own results screen
+   before they had read it. ------------------------------------------------ */
+var KulaLMS = (function(){
+  var done = false;
+  function send(ev){
+    try{
+      window.parent.postMessage({ type: 'lms-embed-event', version: '1.0',
+        payload: { event: ev } }, '*');
+    }catch(e){}
+  }
+  return {
+    completed: function(){ if(done) return; done = true; send('completed'); },
+    advance:   function(){ send('advance'); }
+  };
+})();
 /* kula: re-entry guard. Every declaration below is function scoped, so a
    viewer that re-runs this script re-initialises instead of throwing a
    redeclaration SyntaxError and leaving FLOW undefined. */
 (function(){
 const COVER = {
   "eyebrow": "Kula Revise &middot; Grade 12 History &middot; The 1980s",
-  "title": "Build the Skeleton",
+  "title": "Putting It Together",
   "lines": [
     "Two documents. One from Washington, one from a South African courtroom.",
     "Neither was written for you, and neither was written for the public.",
@@ -760,11 +778,7 @@ const COVER = {
 const RESULTS = {
   "eyebrow": "Lesson 5 report",
   "title": "Where you stand",
-  "done": {
-    "label": "Unit complete",
-    "title": "Build the Skeleton",
-    "text": "Tap Done, then sit What Stuck and compare it with the score you wrote down at the start."
-  },
+  "next": "Continue to What Stuck",
   "footer": "Next: What Stuck, the same eighteen facts asked from the other direction.",
   "bands": {
     "excellent": "You could sit this run tomorrow. Do it again with a clock and write the paragraph out in full.",
@@ -833,7 +847,7 @@ const FLOW = [
       "Township councils were given the power to collect local rents"
     ],
     "correct": 0,
-    "explanation": "Source A names the franchise change as the trigger. Two marks, so give the extension and the exclusion together, because the exclusion is the half that did the work. Option {opt3} is real and it belongs to the law of the year before. The source hands you a date, so use it to pick the right event."
+    "explanation": "Source A names the franchise change as the trigger. Two marks, so give the extension and the exclusion together, because the exclusion is the half that did the work. Option {opt3} is real and it belongs to the law of the year before, which is why it looks right to you. Late 1983 is the franchise change, and 1982 is the councils."
   },
   {
     "type": "question",
@@ -875,7 +889,7 @@ const FLOW = [
       "The reform gave the excluded group control of township councils"
     ],
     "correct": 0,
-    "explanation": "Four marks means two developed points. The first is that a partial reform draws a line and shows everybody which side of it they are on. The second is that the excluded now had something concrete to organise around, which is a demand rather than a grievance. Option {opt2} reverses the sequence, because the front was built in response to the reform, and you need that order."
+    "explanation": "Four marks means two developed points. First, a partial reform draws a line and shows everybody which side of it they are on. Second, the people left out now had something solid to organise around. Not a grievance, a demand. The front was built in answer to the reform, and that order is what the question is asking you for."
   },
   {
     "type": "question",
@@ -889,7 +903,7 @@ const FLOW = [
       "It records the number of people who had joined the organisation nationally"
     ],
     "correct": 0,
-    "explanation": "The phrase is a judgement wearing the clothes of a description. Calling people radicals settles the argument before it starts, because it makes their aims sound like a temperament. Option {opt1} is what a reader in a hurry assumes, and you are being asked to notice that a briefing interprets."
+    "explanation": "The phrase is a judgement dressed up as a description. Call people radicals and you have settled the argument before it starts, because their aims start to sound like a mood rather than a case. Option {opt1} is what a reader in a hurry assumes. You are being asked to notice that a briefing does not just report. It interprets."
   },
   {
     "type": "source",
@@ -929,7 +943,7 @@ const FLOW = [
       "To remove a councillor who refused to collect township rents"
     ],
     "correct": 0,
-    "explanation": "The regulation is quoted in the source and it is about gatherings. Two marks, so name the power and its reach: one meeting, or a whole class of meetings at once. Option {opt1} is a real power of the period, because detention sat under the security laws rather than under these regulations. That answer points you at the wrong document."
+    "explanation": "The regulation is quoted in the source, and it is about gatherings. Two marks, so name the power and say how far it reaches: one meeting, or a whole class of meetings at once. Option {opt1} is a real power of the period. Detention sat under the security laws, not under these regulations, so that answer points you at the wrong document."
   },
   {
     "type": "question",
@@ -968,7 +982,7 @@ const FLOW = [
       "The front was among the most important organisations of the decade"
     ],
     "correct": 0,
-    "explanation": "A topic sentence answers the question in one line, and the question asked how effective. Option {opt1} gives you two dates and no verdict, which is the usual way this paragraph goes wrong. Option {opt2} praises the organisation without saying what it achieved or failed to achieve, because praise is not a verdict."
+    "explanation": "A topic sentence answers the question in one line, and this question asked how effective. Option {opt1} gives you two dates and no verdict, which is the usual way this paragraph goes wrong. Option {opt2} praises the organisation and never says what it achieved. Praise is not a verdict."
   },
   {
     "type": "question",
@@ -982,7 +996,7 @@ const FLOW = [
       "The organisation was described as dominated by radicals seeking confrontation"
     ],
     "correct": 0,
-    "explanation": "Own knowledge is a relevant fact the two sources do not contain. The turnout figure is the obvious one, because neither document mentions the election result at all. The other three are printed in front of you, which is exactly why they feel safe to use."
+    "explanation": "Own knowledge is a relevant fact the two sources do not give you. The turnout figure is the obvious one, because neither document mentions the election result at all. The other three are printed in front of you, which is exactly why they feel safe to use."
   },
   {
     "type": "question",
@@ -1002,7 +1016,7 @@ const FLOW = [
       2,
       3
     ],
-    "explanation": "Topic sentence, source evidence, own knowledge, then the close. That order matters, because the paragraph is being asked for a shape as well as a set of facts. Put your own knowledge first and it reads as an essay that has ignored the sources. Leave the closing sentence off, which is the usual omission, and the paragraph never gets round to answering how effective."
+    "explanation": "Topic sentence, source evidence, own knowledge, then the close. That order matters, because the paragraph is being asked for a shape as well as a set of facts. Put your own knowledge first and it reads as an essay that has ignored the sources."
   },
   {
     "type": "carousel",
@@ -1093,10 +1107,8 @@ const state = {
   order: {},               // qIdx -> shuffled content-index array
   carRead: {},             // stepIdx -> Set of read card indices
   interState: {},          // qIdx -> working state for order/sort
-  poppedBuild: {},         // qIdx -> bool (running-summary popup already shown)
 };
 
-const buildIds = FLOW.map((f,i)=>f.build?i:null).filter(i=>i!==null);
 const assessedIds = FLOW.map((f,i)=>(f.type==="question"&&f.level)?i:null).filter(i=>i!==null);
 
 function esc(s){
@@ -1444,30 +1456,6 @@ function renderSort(item){
   });
 }
 
-// ============ RUNNING SUMMARY (own screen) ============
-function renderRunsum(item){
-  const parts = buildIds.filter(i=>i<=state.idx && state.revealed[i]).map(i=>FLOW[i].part);
-  const freshIdx = parts.length-1;
-  const lis = parts.map((p,i)=>`<li class="${i===freshIdx?"fresh":""}">${esc(p)}</li>`).join("");
-  stage.innerHTML = `
-    <div class="card">
-      <div class="stage-tag">${esc(item.tag||"Your running summary")}</div>
-      ${item.heading?`<h2>${esc(item.heading)}</h2>`:""}
-      ${item.html?item.html:""}
-      <div class="runsum"><div class="runsum-label">${esc(item.label||"Your running summary")}</div><ol>${lis}</ol></div>
-      ${item.outro?`<p class="runsum-outro">${item.outro}</p>`:""}
-    </div>`;
-}
-
-// ============ POPUP after a build question ============
-function showBuildPop(part, label){
-  const back=document.createElement("div");
-  back.className="pop-back";
-  back.innerHTML=`<div class="pop"><div class="pop-label">${esc(label||"The line this lesson argues")}</div><div class="pop-text">${esc(part)}</div><button class="pop-btn" id="pop-ok">Got it</button></div>`;
-  document.body.appendChild(back);
-  document.getElementById("pop-ok").addEventListener("click",()=>back.remove());
-}
-
 // ============ NAV ============
 function syncNav(isQuestion){
   nav.classList.remove("hidden");
@@ -1496,12 +1484,6 @@ function syncNavInteractive(canCheck, answered, onCheck){
 }
 
 function defaultNext(){
-  // fire the running-summary popup when leaving a build question
-  const cur=FLOW[state.idx];
-  if(cur && cur.build && state.revealed[state.idx] && !state.poppedBuild[state.idx]){
-    state.poppedBuild[state.idx]=true;
-    showBuildPop(cur.part, cur.buildLabel);
-  }
   if(state.idx<FLOW.length-1){ state.idx++; render(); } else showResults();
 }
 
@@ -1526,7 +1508,6 @@ function render(){
     case "stat": renderStat(item); syncNav(false); break;
     case "source": renderSource(item); syncNav(false); break;
     case "question": renderQuestion(item); break;
-    case "runsum": renderRunsum(item); syncNav(false); break;
     default: renderContent(item); syncNav(false);
   }
 }
@@ -1567,8 +1548,6 @@ function showResults(){
     const p=Math.round(g/ids.length*100);
     return `<div class="bd-row"><div class="bd-name">${sp}</div><div class="bd-bar"><div class="bd-fill" style="width:${p}%"></div></div><div class="bd-score">${g}/${ids.length}</div></div>`;
   }).join("");
-  const parts=buildIds.filter(i=>state.revealed[i]).map(i=>FLOW[i].part);
-  const runsum = parts.length?`<div class="breakdown"><div class="breakdown-label">Your running summary</div><ol style="margin:0;padding-left:1.3rem;">${parts.map(p=>`<li style="font-size:0.98rem;line-height:1.62;margin-bottom:0.6rem;">${esc(p)}</li>`).join("")}</ol></div>`:"";
   stage.innerHTML = `
     <div class="results-head">
       <div class="results-eyebrow">${RESULTS.eyebrow||"Lesson report"}</div>
@@ -1581,24 +1560,19 @@ function showResults(){
     </div>
     <div class="grade-desc">${desc}</div>
     <div class="breakdown"><div class="breakdown-label">By skill</div>${rows}</div>
-    ${runsum}
     <div class="results-actions">
       <button class="btn-secondary" id="restart-btn">Restart lesson</button>
-      <button class="btn-primary" id="finish-btn">Finish &rarr;</button>
+      <button class="btn-primary" id="finish-btn">${esc(RESULTS.next||"Continue")} &rarr;</button>
     </div>
-    ${RESULTS.footer?`<div style="text-align:center;margin-top:1.1rem;font-size:0.92rem;color:var(--fade);">${esc(RESULTS.footer)}</div>`:""}`;
+    ${RESULTS.footer?`<div style="text-align:center;margin-top:1.1rem;padding-bottom:4.5rem;font-size:0.92rem;color:var(--fade);">${esc(RESULTS.footer)}</div>`:""}`;
   document.getElementById("restart-btn").addEventListener("click",()=>{
-    state.idx=-1; state.answers={}; state.revealed={}; state.order={}; state.carRead={}; state.interState={}; state.poppedBuild={};
+    state.idx=-1; state.answers={}; state.revealed={}; state.order={}; state.carRead={}; state.interState={};
     renderCover();
   });
-  document.getElementById("finish-btn").addEventListener("click",()=>{
-    const back=document.createElement("div");
-    back.className="pop-back";
-    const D = RESULTS.done||{};
-    back.innerHTML=`<div class="pop"><div class="pop-label">${esc(D.label||"Lesson complete")}</div>${D.title?`<h3 style="margin:.4rem 0 .2rem;font-size:1.05rem;">${esc(D.title)}</h3>`:""}<div class="pop-text">${esc(D.text||"Tap Done to continue.")}</div><button class="pop-btn" id="fin-ok">Got it</button></div>`;
-    document.body.appendChild(back);
-    document.getElementById("fin-ok").addEventListener("click",()=>back.remove());
-  });
+  /* The button at the end of the lesson is the thing that continues. It does
+     not point at a control somewhere else on the page. */
+  document.getElementById("finish-btn").addEventListener("click",()=>{ KulaLMS.advance(); });
+  KulaLMS.completed();
 }
 
 function isRight(i){
@@ -1615,32 +1589,45 @@ renderCover();
 
 /* ---- MODE TOGGLE ---------------------------------------------------------
    Injects its own button so there is no stray markup, and lives inside the
-   single script block so a first-to-last script extraction still parses. */
+   single script block so a first-to-last script extraction still parses.
+
+   What is stored is the mode the learner chose, "light" or "dark". Never a
+   class name, and never "native". A source unit is built light and flips with
+   body.dark; an essay unit is built dark and flips with body.bright. Storing
+   the class name, or storing "native", meant the word saved on one unit did not
+   describe anything on the other, so a learner who chose dark and then opened a
+   unit built the other way round got whatever that file defaulted to. The
+   choice now travels with them across both kinds of unit.
+
+   To port this to an essay unit, set NATIVE to "dark", FLIP to "light" and CLS
+   to "bright". Nothing else changes. */
 (function(){
-  var NATIVE = "light";
-  try{ if(localStorage.getItem("kula-mode")==="alt"){ document.body.classList.add("alt"); } }catch(e){}
+  var NATIVE = "light";   // the mode this unit is designed in
+  var FLIP   = "dark";    // the mode the toggle offers
+  var CLS    = "dark";    // the class that produces FLIP in this unit
+  try{ if(localStorage.getItem("kula-mode")===FLIP){ document.body.classList.add(CLS); } }catch(e){}
   var SUN='<circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>';
   var MOON='<path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/>';
-  var b=document.getElementById("mode-toggle");
+  var b=document.getElementById("kula-mode-toggle");
   if(!b){
     b=document.createElement("button");
-    b.className="mode-toggle"; b.id="mode-toggle"; b.type="button";
+    b.className="mode-toggle"; b.id="kula-mode-toggle"; b.type="button";
     b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" id="mode-icon"></svg><span id="mode-label"></span>';
     document.body.appendChild(b);
   }
   var lab=document.getElementById("mode-label"), ic=document.getElementById("mode-icon");
   function paint(){
-    var onAlt=document.body.classList.contains("alt");
-    var showing = onAlt ? (NATIVE==="dark" ? "light" : "dark") : NATIVE;
+    var flipped = document.body.classList.contains(CLS);
+    var showing = flipped ? FLIP : NATIVE;
     var offering = showing==="dark" ? "light" : "dark";
-    lab.textContent = offering==="light" ? "Light Mode" : "Dark Mode";
+    lab.textContent = offering==="light" ? "Light mode" : "Dark mode";
     ic.innerHTML = offering==="light" ? SUN : MOON;
-    b.setAttribute("aria-pressed", onAlt ? "true" : "false");
+    b.setAttribute("aria-pressed", showing==="dark" ? "true" : "false");
     b.setAttribute("aria-label", "Switch to " + offering + " mode");
   }
   b.addEventListener("click",function(){
-    var onAlt=document.body.classList.toggle("alt");
-    try{ localStorage.setItem("kula-mode", onAlt ? "alt" : "native"); }catch(e){}
+    var flipped=document.body.classList.toggle(CLS);
+    try{ localStorage.setItem("kula-mode", flipped ? FLIP : NATIVE); }catch(e){}
     paint();
   });
   paint();
